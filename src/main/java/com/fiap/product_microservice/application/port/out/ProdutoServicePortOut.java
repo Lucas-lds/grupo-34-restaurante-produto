@@ -16,4 +16,6 @@ public interface ProdutoServicePortOut {
     Produto atualizarProduto(Long id, Produto produto) throws BadRequestException;
 
     void deletarPorId(Long id);
+
+    Produto buscarPorId(Long id);
 }
