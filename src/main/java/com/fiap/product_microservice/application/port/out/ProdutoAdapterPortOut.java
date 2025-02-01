@@ -15,4 +15,6 @@ public interface ProdutoAdapterPortOut {
     Produto atualizarProduto(Long id, Produto produto);
 
     void deletarPorId(Long id);
+
+    Produto buscarPorId(Long id);
 }

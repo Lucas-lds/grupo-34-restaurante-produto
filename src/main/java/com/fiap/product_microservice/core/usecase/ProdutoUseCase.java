@@ -40,4 +40,9 @@ public class ProdutoUseCase implements ProdutoUseCasePortOut {
     public void deletarPorId(Long id) {
         produtoService.deletarPorId(id);
     }
+
+    @Override
+    public Produto buscarPorid(Long id) {
+        return produtoService.buscarPorId(id);
+    }
 }

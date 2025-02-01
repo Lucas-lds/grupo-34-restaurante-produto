@@ -40,4 +40,9 @@ public class ProdutoService implements ProdutoServicePortOut{
     public void deletarPorId(Long id) {
         produtoAdapterPortOut.deletarPorId(id);
     }
+
+    @Override
+    public Produto buscarPorId(Long id) {
+        return produtoAdapterPortOut.buscarPorId(id);
+    }
 }
