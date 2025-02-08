@@ -58,4 +58,12 @@ public class ProdutoController {
         produtoUseCasePortOut.deletarPorId(id);
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "Buscar produto por Id", description = "Busca produto filtrado pelo Id.")
+    @GetMapping("/{id}")
+    public ResponseEntity<ProdutoResponse> buscarPorId(@PathVariable Long id) {
+        return new ResponseEntity<>(ProdutoResponse.fromDomain(produtoUseCasePortOut.buscarPorid(id)), HttpStatus.OK);
+    }
+
+
 }

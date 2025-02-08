@@ -82,5 +82,13 @@ public class ProdutoAdapterOut implements ProdutoAdapterPortOut {
     public void deletarPorId(Long id) {
         produtoRepository.deleteById(id);
     }
-    
+
+    @Override
+    public Produto buscarPorId(Long id) {
+        return produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"))
+                .toDomain();
+    }
+
+
 }

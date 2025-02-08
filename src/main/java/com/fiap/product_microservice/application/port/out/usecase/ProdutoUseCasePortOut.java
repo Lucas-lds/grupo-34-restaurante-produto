@@ -16,4 +16,6 @@ public interface ProdutoUseCasePortOut {
 
     void deletarPorId(Long id);
 
+    Produto buscarPorid(Long id);
+
 }
