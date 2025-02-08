@@ -3,8 +3,8 @@
 resource "aws_instance" "db_client_produto" {
   ami                    = "ami-0ebfd941bbafe70c6"
   instance_type          = "t2.micro"
-  key_name               = "chave-fiap2"
-  vpc_security_group_ids = [aws_security_group.ssh_cluster.id]
+  key_name               = aws_key_pair.generated_key.key_name
+  vpc_security_group_ids = [aws_security_group.ssh_cluster_ms_produto.id]
   subnet_id              = "subnet-0ba1d16a81898b46b"
 
   # Copia o arquivo SQL para a instância
