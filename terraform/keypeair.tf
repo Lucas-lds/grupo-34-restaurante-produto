@@ -17,13 +17,13 @@ output "pem" {
 }
 
 # Recurso para criar um segredo no AWS Secrets Manager
-resource "aws_secretsmanager_secret" "example" {
+resource "aws_secretsmanager_secret" "produto" {
   name = "keypair-ms-produto-v2" # Nome do segredo que será armazenado
 }
 
 # Recurso para armazenar a versão do segredo no AWS Secrets Manager
-resource "aws_secretsmanager_secret_version" "example" {
-  secret_id = aws_secretsmanager_secret.example.id # ID do segredo que estamos atualizando
+resource "aws_secretsmanager_secret_version" "produto" {
+  secret_id = aws_secretsmanager_secret.produto.id # ID do segredo que estamos atualizando
   secret_string = jsonencode({
 
     "KeyName" : "${aws_key_pair.generated_key.key_name}",           # Nome da chave gerada
