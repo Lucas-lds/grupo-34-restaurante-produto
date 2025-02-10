@@ -23,7 +23,14 @@ jobs:
       - name: Build application
         run: |
           chmod +x mvnw # Concede permissão de execução ao Maven Wrapper
-          ./mvnw clean package -DskipTests=true
+          ./mvnw clean verify jacoco:report
+
+      - name: Check if JaCoCo report was generated
+        run: |
+          if [ ! -f target/site/jacoco/jacoco.xml ]; then
+            echo "JaCoCo report not found! Build failed."
+            exit 1
+          fi
 
       - name: Upload application artifact
         uses: actions/upload-artifact@v4
