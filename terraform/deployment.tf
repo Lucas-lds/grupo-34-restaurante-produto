@@ -1,6 +1,6 @@
 ### DEPLOYMENT PARA O SERVIÇO DE produto ###
 resource "kubernetes_deployment" "produto-api" {
-  depends_on = [aws_eks_cluster.eks-cluster, aws_eks_node_group.eks-cluster]
+  #depends_on = [aws_eks_cluster.eks-cluster, aws_eks_node_group.eks-cluster]
 
   metadata {
     name = "produto"
@@ -30,7 +30,7 @@ resource "kubernetes_deployment" "produto-api" {
 
         container {
           name  = "produto"
-          image = "717279688908.dkr.ecr.us-east-1.amazonaws.com/repositorio-produto:v1"
+          image = "717279688908.dkr.ecr.us-east-1.amazonaws.com/repositorio:v10"
 
           env {
             name  = "RDS_ENDPOINT"

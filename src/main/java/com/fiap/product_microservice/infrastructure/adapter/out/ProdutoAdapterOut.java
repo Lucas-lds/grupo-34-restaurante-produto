@@ -4,20 +4,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import java.util.Optional;
+
+import com.fiap.product_microservice.infrastructure.exception.ProdutoNaoEncontradoException;
 import org.springframework.stereotype.Component;
 import com.fiap.product_microservice.application.port.out.ProdutoAdapterPortOut;
 import com.fiap.product_microservice.core.domain.Produto;
 import com.fiap.product_microservice.infrastructure.adapter.in.validation.ProdutoValidation;
 import com.fiap.product_microservice.infrastructure.adapter.out.entity.ProdutoEntity;
 import com.fiap.product_microservice.infrastructure.adapter.out.repository.ProdutoRepository;
-import com.fiap.product_microservice.infrastructure.exception.ProdutoException;
+import com.fiap.product_microservice.infrastructure.exception.ProdutoInvalidoException;
 
 @Component
 public class ProdutoAdapterOut implements ProdutoAdapterPortOut {
 
     private final ProdutoRepository produtoRepository;
 
-    public ProdutoAdapterOut( ProdutoRepository produtoRepository) {
+    public ProdutoAdapterOut(ProdutoRepository produtoRepository) {
         this.produtoRepository = produtoRepository;
     }
 
@@ -71,10 +73,12 @@ public class ProdutoAdapterOut implements ProdutoAdapterPortOut {
                     return produtoEntityExistente.toDomain();
                 }
             } else {
-                throw new ProdutoException("Produto com ID " + id + " não encontrado");
+                throw new ProdutoNaoEncontradoException("Produto com ID " + id + " não encontrado");
             }
+        } catch (ProdutoNaoEncontradoException ex) {
+            throw ex;
         } catch (Exception ex) {
-            throw new ProdutoException(ex.getMessage());
+            throw new ProdutoInvalidoException(ex.getMessage());
         }
     }
 
@@ -86,7 +90,7 @@ public class ProdutoAdapterOut implements ProdutoAdapterPortOut {
     @Override
     public Produto buscarPorId(Long id) {
         return produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"))
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado"))
                 .toDomain();
     }
 

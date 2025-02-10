@@ -1,8 +1,6 @@
 package com.fiap.product_microservice.core.domain;
 
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 public class Produto {
 
     private Long idProduto;
@@ -11,6 +9,9 @@ public class Produto {
     private double preco;
     private String descricao;
     private String imagemUrl;
+
+    public Produto() {
+    }
 
     public Produto(Long idProduto, String nome, String categoria, double preco, String descricao, String imagemUrl) {
         this.idProduto = idProduto;
