@@ -2,7 +2,7 @@ package com.fiap.product_microservice.infrastructure.adapter.in.validation;
 
 import com.fiap.product_microservice.core.domain.Category;
 import com.fiap.product_microservice.core.domain.Produto;
-import com.fiap.product_microservice.infrastructure.exception.ProdutoException;
+import com.fiap.product_microservice.infrastructure.exception.ProdutoInvalidoException;
 
 public class ProdutoValidation {
     
@@ -12,10 +12,10 @@ public class ProdutoValidation {
         String categoria = produto.getCategoria();
 
             if (nome == null || nome == "") {
-                throw new ProdutoException("O campo nome é obrigatório!");
+                throw new ProdutoInvalidoException("O campo nome é obrigatório!");
             }
             if (preco <= 0) {
-                throw new ProdutoException("Preço inválido, o valor deve ser maior que zero.");
+                throw new ProdutoInvalidoException("Preço inválido, o valor deve ser maior que zero.");
             }
 
             validate(categoria);
@@ -25,7 +25,7 @@ public class ProdutoValidation {
 
     public static void validate(String categoria) {
         if (!isValidCategory(categoria)) {
-            throw new ProdutoException("Categoria inválida: " + categoria);
+            throw new ProdutoInvalidoException("Categoria inválida: " + categoria);
         }
     }
 
